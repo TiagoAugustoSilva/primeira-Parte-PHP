@@ -63,12 +63,12 @@ if (isset($_GET['id'])) {
 include_once("./layout/_header.php");
 ?>
 <div class="card mt-4">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <h5><?= $id ? 'codigo ' . $id .  ' Editar Produto ' : 'Adicionar Produto' ?></h5>
+    <div class="card-header d-flex justify-content-between align-items-center bg-warning">
+        <h3  class="text-center mt-3"><?= $id ? ' Editar Produto ' : 'Adicionar Produto ' ?></h3>
         <?php if ($id) : ?>
-            <a class="btn btn-warning" href="cadastro.php?id=<?= $id ?>">Editar</a>
+            <a class="btn btn-warning" href="cadastro.php?id=<?= $id ?>"></a>
         <?php endif; ?>
-    </div>
+    </div>      
 
     <form method="post" autocomplete="off">
         <div class="card-body">
@@ -97,10 +97,10 @@ include_once("./layout/_header.php");
                 <input type="text" class="form-control" id="unidade_medida" name="unidade_medida" value="<?= $unidade_medida ?>" required />
             </div>
         </div>
-
-        <div class="card-footer">
-            <button type="submit" class="btn btn-success">Salvar</button>
-            <a class="btn btn-primary" href="index.php">Voltar</a>
+        <!--style height altera a altura que o card irá ter!-->
+        <div class="card-footer" style="height: 200px;">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a class="btn btn-danger" href="index.php">Voltar</a>
         </div>
     </form>
 </div>
