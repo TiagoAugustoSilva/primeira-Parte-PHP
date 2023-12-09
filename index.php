@@ -37,9 +37,11 @@ include_once("./layout/_header.php");
     <!--justify-content-between joga o botão la no fim Chick D+-->
     <div class="card-header d-flex justify-content-between align-items-center custom-card-header bg-warning">
         <!-- o text-center my-4 mx-auto é o mesmo que display flex, justify-content-center align-items-center-->
-        <h5 class="text-center my-4 h5-striped ">Mini Faturamento</h5>
+        <h2 class="text-center my-4 h2-striped">Mini Faturamento
+        <a class="btn btn-primary" href="cadastro.php">+Adicionar</a>
+        </h2>
         <!--ao utilizar btn-success ele dará a  cor verde ao botão pelo boostrap-->
-        <a class="btn btn-success" href="cadastro.php">+Adicionar</a>
+        <a class="btn btn-dark" href="movimentacoes.php">Controle de Estoque</a>
     </div>
     <!-- Conteúdo do corpo do cartão -->
     <div class="card-body">
