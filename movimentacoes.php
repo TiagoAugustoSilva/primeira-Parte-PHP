@@ -7,6 +7,9 @@ $quantidade = '';
 $tipo_documento = '';
 $numero_documento = '';
 
+
+
+
 // atenção: este get está associado ao botão excluir, junto ao get global do código.
 if (isset($_GET['excluir'])) {
     $id = filter_input(INPUT_GET, 'excluir', FILTER_SANITIZE_NUMBER_INT);
@@ -18,6 +21,7 @@ if (isset($_GET['excluir'])) {
         exit;
     }
 }
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $data_movimentacao = $_POST['data_movimentacao'];
@@ -38,7 +42,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 $stm = $conn->query('SELECT * FROM movimentacoes');
 $movimentacoes = $stm->fetchAll();
 
+$results = $conn->query("select * from movimentacoes")->fetchAll();
+
 $arrayMovimentacao = [1 => 'CNPJ', 2 => 'CPF'];
+
+
 
 include_once("./layout/_header.php");
 ?>
@@ -86,7 +94,6 @@ include_once("./layout/_header.php");
                             <td><?= $movimentacao['id'] ?></td>
                             <td><?= $movimentacao['data_movimentacao'] ?></td>
                             <td><?= $movimentacao['quantidade'] ?></td>
-                            <!--mostrar tipo de documento-->
                             <td><?= ($movimentacao['tipo_documento'] == 1) ? 'CNPJ' : 'CPF' ?></td>
                             <td><?= $movimentacao['numero_documento'] ?></td>
                             <td>
