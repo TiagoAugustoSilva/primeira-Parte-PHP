@@ -6,6 +6,7 @@ $produto = '';
 $descricao = '';
 $valor_unitario = '';
 $unidade_medida = '';
+$quantidade = '';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $id = isset($_POST['id']) ? filter_input(INPUT_POST, "id", FILTER_SANITIZE_NUMBER_INT) : null;
@@ -13,13 +14,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $descricao = filter_input(INPUT_POST, "descricao", FILTER_SANITIZE_NUMBER_INT);
     $valor_unitario = filter_input(INPUT_POST, "valor_unitario", FILTER_SANITIZE_NUMBER_FLOAT);
     $unidade_medida = filter_input(INPUT_POST, "unidade_medida", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $quantidade = filter_input(INPUT_POST, "quantidade", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
     if (!$id) {
         // Se $id não existe, prepara a instrução INSERT
-        $stm = $conn->prepare("INSERT INTO cadastrar_produto (produto, descricao, valor_unitario, unidade_medida) VALUES (:produto, :descricao, :valor_unitario, :unidade_medida)");
+        $stm = $conn->prepare("INSERT INTO cadastrar_produto (produto, descricao, valor_unitario, unidade_medida, quantidade) VALUES (:produto, :descricao, :valor_unitario, :unidade_medida, :quantidade)");
     } else {
         // Se $id existe, prepara a instrução UPDATE
-        $stm = $conn->prepare("UPDATE cadastrar_produto SET produto=:produto, descricao=:descricao, valor_unitario=:valor_unitario, unidade_medida=:unidade_medida WHERE id=:id");
+        $stm = $conn->prepare("UPDATE cadastrar_produto SET produto=:produto, descricao=:descricao, valor_unitario=:valor_unitario, unidade_medida=:unidade_medida, quantidade=:quantidade WHERE id=:id");
         $stm->bindValue(':id', $id);
     }
 
@@ -28,6 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stm->bindValue(':descricao', $descricao);
     $stm->bindValue(':valor_unitario', $valor_unitario);
     $stm->bindValue(':unidade_medida', $unidade_medida);
+    $stm->bindValue(':quantidade', $quantidade);
+
 
     $stm->execute();
 
@@ -58,6 +62,7 @@ if (isset($_GET['id'])) {
     $descricao = $result['descricao'];
     $valor_unitario = $result['valor_unitario'];
     $unidade_medida = $result['unidade_medida'];
+    $quantidade = $result['quantidade'];
 }
 
 include_once("./layout/_header.php");
@@ -95,6 +100,10 @@ include_once("./layout/_header.php");
             <div class="form-group">
                 <label for="unidade_medida">Unidade de Medida</label>
                 <input type="text" class="form-control" id="unidade_medida" name="unidade_medida" value="<?= $unidade_medida ?>" required />
+            </div>
+            <div class="form-group">
+                <label for="quantidade">Quantidade</label>
+                <input type="number" class="form-control" id="quantidade" name="quantidade" value="<?= $Quantidade ?>" required />
             </div>
         </div>
         <!--style height altera a altura que o card irá ter!-->
