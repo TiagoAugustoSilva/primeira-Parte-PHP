@@ -14,7 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Obtém os dados do formulário
         $newUsername = $_POST["new_username"];
-        $newPassword = $_POST["new_password"];
+        //utilizamos o hash para armazenar a senha de forma segura
+        $newPassword = password_hash($_POST["new_password"], PASSWORD_DEFAULT);
 
         // Proteção contra SQL injection usando prepared statements
         $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
@@ -22,13 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(':password', $newPassword);
         $stmt->execute();
 
-        echo "<h2>Cadastro bem-sucedido!</h2>";
+        // Redireciona para a página de login após o cadastro bem-sucedido
+        header("Location: login.php");
+        exit();
     } catch (PDOException $e) {
         die("Erro de conexão: " . $e->getMessage());
+    } finally {
+        // Fecha a conexão
+        $conn = null;
     }
-
-    // Fecha a conexão
-    $conn = null;
 }
 ?>
 
@@ -60,7 +63,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="mt-4 text-center">
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
-                    <a href="login.php" class="btn btn-danger">Login</a>
+                    <a href="login.php" class="btn btn-danger">voltar</a>
+                 
+            
                 </div>
             </form>
         </div>
