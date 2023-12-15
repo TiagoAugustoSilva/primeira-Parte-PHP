@@ -28,21 +28,22 @@ include_once("./layout/_header.php");
         <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar bg-dark mt-4">
             <div class="position-sticky">
                 <ul class="nav flex-column">
-                <li class="nav-item">
-                            <h3 class="text-light">Menu</h3>
-                        </li>
-                    <li class="nav-item ">
+                    <li class="nav-item">
+                        <h3 class="text-light">Menu</h3>
+                    </li>
+                    <li class="nav-item mt-3">
                         <a class="nav-link active" href="movimentacoes.php">
-                          <h5 class="text-light"> Controle de Estoque</h5> 
+                            <h5 class="text-light"> Controle de Estoque</h5>
                         </a>
                     </li>
-                  
-                    <li class="nav-item ">
+
+                    <li class="nav-item">
                         <a class="nav-link " href="vendas.php">
-                            <h5 class="text-light">Venda Produtos</h5>
-                            
+                            <h5 class="text-light">Vendas Produtos</h5>
+
                         </a>
                     </li>
+
                 </ul>
             </div>
         </nav>
@@ -55,6 +56,18 @@ include_once("./layout/_header.php");
                         <a class="btn btn-primary" href="cadastro.php">+Adicionar</a>
                     </h2>
                     <a class="btn btn-dark" href="movimentacoes.php">Controle de Estoque</a>
+
+                    <div class="text-center mt-3" >
+                        
+                            <?php
+                            // Adiciona um botão/link para sair (redirecionando para a tela de login)
+                            echo '<a class="btn btn-danger" style="font-size: 17px; padding: 6px 2rem;" href="login.php">Sair</a>';
+                            ?>
+                      
+                    </div>
+
+
+
                 </div>
                 <div class="card-body">
                     <!-- Tabela de Cadastro de Produtos -->
@@ -68,7 +81,7 @@ include_once("./layout/_header.php");
                                 <th>Descrição</th>
                                 <th>Valor Unitário</th>
                                 <th>Unidade de Medida</th>
-                                
+
                                 <th></th>
                             </tr>
                         </thead>
@@ -82,7 +95,7 @@ include_once("./layout/_header.php");
                                     <td><?= $arrayDescricao[$item['descricao']] ?></td>
                                     <td><?= $item['valor_unitario'] ?></td>
                                     <td><?= $item['unidade_medida'] ?></td>
-                                    
+
                                     <td>
                                         <a class="btn btn-sm btn-primary" href="cadastro.php?id=<?= $item['id'] ?>">Editar</a>
                                         <button class="btn btn-sm btn-danger" onclick="excluir(<?= $item['id'] ?>)">Excluir</button>
